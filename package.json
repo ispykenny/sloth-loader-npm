@@ -1,0 +1,13 @@
+{
+  "name": "sloth-loader",
+  "author": "Kenny Krosky",
+  "version": "1.0.7",
+  "main": "Slothloader.vue",
+  "browser": {
+    "./sfc": "Slothloader.vue"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ispykenny/sloth-loader.git"
+  }
+}
