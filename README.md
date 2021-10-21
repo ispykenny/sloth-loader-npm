@@ -1,5 +1,5 @@
 # sloth-loader  🦥
- Lazy loader Vue Component with intersection observer
+ Image Lazy loader Vue Component with intersection observer
  [Example here](https://sloth-loader.netlify.app/)
 
 ## Installation
@@ -19,7 +19,6 @@ import Slothloader from 'sloth-loader/index.vue';
     :height=1000
     :omitAspect=false
     :src=src
-    loadedClass="loaded"
     alt="Loaded image"
   />
 </div>

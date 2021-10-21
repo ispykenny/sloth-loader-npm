@@ -1,7 +1,7 @@
 {
   "name": "sloth-loader",
   "author": "Kenny Krosky",
-  "version": "1.0.8",
+  "version": "1.1.1",
   "main": "Slothloader.vue",
   "browser": {
     "./sfc": "Slothloader.vue"
