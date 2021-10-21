@@ -44,11 +44,13 @@ Use this to avoid maintaining the set or default aspect ratio of your image if y
 ###### Prop type: Number
 ###### Required: false
 If using width, then the height prop is also required to generate an aspect ratio for the image parent.
+Though you're providing a width value, we never set the width of the image. This is used strictly to generate an apsect ratio ```padding-bottom: ${this.$props.height/this.$props.width * 100}%```
 
 ### height 
 ###### Prop type: Number
 ###### Required: false
 If using height, then the width prop is also required to generate an aspect ratio for the image parent.
+Though you're providing a height value, we never set the height of the image. This is used strictly to generate an apsect ratio ```padding-bottom: ${this.$props.height/this.$props.width * 100}%```
 
 ### loadWhen 
 ###### Prop type: Number
