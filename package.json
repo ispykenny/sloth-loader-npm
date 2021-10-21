@@ -1,8 +1,14 @@
 {
   "name": "sloth-loader",
   "author": "Kenny Krosky",
-  "version": "1.1.2",
+  "version": "1.1.3",
   "main": "Slothloader.vue",
+  "keywords": [
+    "Vue image lazy loader",
+    "lazy loader for vue",
+    "Vue lazy load component",
+    "lazy load component for vue"
+  ],
   "browser": {
     "./sfc": "Slothloader.vue"
   },
