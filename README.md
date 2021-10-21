@@ -1,4 +1,4 @@
-# sloth-loader 🦥
+# sloth-loader  🦥
  Lazy loader Vue Component with intersection observer
  [Example here](https://sloth-loader.netlify.app/)
 
@@ -12,15 +12,17 @@ import Slothloader from 'sloth-loader/index.vue';
 ```
 ## use in component
 ```
-<Slothloader
-  :width=1000
-  :height=1000
-  :omitAspect=false
-  :src=src
-  :loadWhen=0.2
-  loadedClass="loaded"
-  alt="Loaded image"
-/>
+<div class="container">
+  <Slothloader
+    :fadeIn=true
+    :width=1000
+    :height=1000
+    :omitAspect=false
+    :src=src
+    loadedClass="loaded"
+    alt="Loaded image"
+  />
+</div>
 ```
 
 # Component Props
@@ -29,6 +31,10 @@ import Slothloader from 'sloth-loader/index.vue';
 ###### Prop type: String
 ###### Required: true
 value of image source
+### fadeIn 
+###### Prop type: Boolean
+###### Required: false
+set prop to true if you want image to have a transitional fade-in on load.
 
 ### omitAspect 
 ###### Prop type: String
