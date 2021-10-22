@@ -1,3 +1,37 @@
+const IN_VIEW_CLASS = 'in-view';
+const ID_ATTR = 'data-sloth-id';
+const LAZY_LOAD_IMG_SRC_ATTR = 'data-sloth-src';
+const COMPONENT_PROPS = {
+  dataLazySrc: {
+    type: String,
+    default: null
+  },
+  omitAspect: {
+    type: Boolean,
+    default: false
+  },
+  height: {
+    type: Number,
+    default: 1080
+  },
+  width: {
+    type: Number,
+    default: 1920
+  },
+  loadWhen: {
+    type: Number,
+    default: 0.5
+  }, 
+  fadeIn: {
+    type: Boolean,
+    default: false
+  }, 
+  alt: {
+    type: String,
+    default: 'Loaded image',
+  }
+};
+
 const intersectionOptions = {
   root: null,
   rootMargin: '0px',
@@ -12,19 +46,21 @@ const mutationOptions = {
 
 export default {
   install(Vue, options) {
+    Vue.$slothImages = [];
+
     const intersectionHandler = (entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
+          entry.target.classList.add(IN_VIEW_CLASS);
         }
       });
     };
 
     const mutationHandler = (mutations) => {
       mutations.forEach(({ target }) => {
-        const inView = target.classList.contains('in-view');
-        const _uid = Number(target.getAttribute('data-sloth-id'));
-        const lazySrc = target.getAttribute('data-lazy-src');
+        const inView = target.classList.contains(IN_VIEW_CLASS);
+        const _uid = Number(target.getAttribute(ID_ATTR));
+        const lazySrc = target.getAttribute(LAZY_LOAD_IMG_SRC_ATTR);
       
         if (inView) {
           const targetComponent = Vue.$slothImages.filter($slothImage => $slothImage._uid === _uid).shift();
@@ -39,51 +75,22 @@ export default {
       });
     };
 
-    Vue.$slothImages = [];
-
     Vue.$slothImageObserver = new IntersectionObserver(intersectionHandler, intersectionOptions);
     Vue.$slothMutationObserver = new MutationObserver(mutationHandler);
 
     Vue.component('sloth-image', {
-      props: {
-        dataLazySrc: {
-          type: String,
-          default: null
-        },
-        omitAspect: {
-          type: Boolean,
-          default: false
-        },
-        height: {
-          type: Number,
-          default: 1080
-        },
-        width: {
-          type: Number,
-          default: 1920
-        },
-        loadWhen: {
-          type: Number,
-          default: 0.5
-        }, 
-        fadeIn: {
-          type: Boolean,
-          default: false
-        }, 
-        alt: {
-          type: String,
-          default: 'Loaded image',
-        }
-      },
+      props: COMPONENT_PROPS,
       mounted() {
+        // add to list of live image Components
         Vue.$slothImages = [...Vue.$slothImages, this];
+        // make observers aware of new Component in DOM
         Vue.$slothImageObserver.observe(this.$el);
         Vue.$slothMutationObserver.observe(this.$el, mutationOptions);
       },
       destroyed() {
         Vue.$slothImageObserver.unobserve(this.$el);
         Vue.$slothMutationObserver.unobserve(this.$el);
-        // TODO: remove from Vue.$slothImages
+        // TODO: remove from list of live image Components
       },
       data() {
         return {
@@ -94,11 +101,11 @@ export default {
       render(createElement) {
         return createElement('img', {
           class: {
-            'loaded': this.isLoaded,
+            loaded: this.isLoaded,
           },
           attrs: {
-            'data-lazy-src': this.dataLazySrc,
-            'data-sloth-id': this._uid,
+            [LAZY_LOAD_IMG_SRC_ATTR]: this.dataSlothSrc,
+            [ID_ATTR]: this._uid,
             src: this.loadedSrc,
           },
         });
