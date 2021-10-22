@@ -16,5 +16,33 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ispykenny/sloth-loader-npm.git"
+  },
+  "scripts": {
+    "test": "exit 0;",
+    "build": "cross-env NODE_ENV=production webpack --config webpack.config.js",
+    "serve": "poi -s ./src/main.js"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.5.5",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.5.5",
+    "@babel/preset-env": "^7.5.5",
+    "babel-loader": "^8.0.6",
+    "babel-preset-vue": "^2.0.2",
+    "cross-env": "^5.2.0",
+    "poi": "^12.10.3",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "vue": "^2.6.10",
+    "vue-html-loader": "^1.2.4",
+    "vue-loader": "^15.7.1",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "^2.6.10",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  },
+  "dependencies": {
+    "core-js": "^3.18.3",
+    "regenerator-runtime": "^0.13.9",
+    "vue": "^2.6.10"
   }
 }
